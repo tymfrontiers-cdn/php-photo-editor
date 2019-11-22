@@ -70,10 +70,10 @@ trait PhotoEditor{
         break;
 				default: return false;
 	    }
-			$resizer = new \Eventviva\ImageResize($this->fullPath());
-			$resizer->resizeToWidth($this->image_thumb_size[0]);
-			$resizer->save(FILES_DIR.$this->_path."thumb_{$this->_name}");
-			if( \is_file($this->watermark_img)){ $this->watermarkImage(); }
+			// $resizer = new \Gumlet\ImageResize($this->fullPath());
+			// $resizer->resizeToWidth($this->image_thumb_size[0]);
+			// $resizer->save($this->_path."thumb_{$this->_name}");
+			if( !empty($this->watermark_img) && \is_file($this->watermark_img)){ $this->watermarkImage(); }
 			\imagedestroy($cropped);
 			return true;
 		}
@@ -136,9 +136,9 @@ trait PhotoEditor{
         break;
 				default: return false;
 	    }
-			$resizer = new \Eventviva\ImageResize($this->fullPath());
-			$resizer->resizeToWidth($this->image_thumb_size[0]);
-			$resizer->save(FILES_DIR.$this->_path."thumb_{$this->_name}");
+			// $resizer = new \Gumlet\ImageResize($this->fullPath());
+			// $resizer->resizeToWidth($this->image_thumb_size[0]);
+			// $resizer->save($this->_path."thumb_{$this->_name}");
 			\imagedestroy($img);
 			\imagedestroy($rotate);
 			return true;
