@@ -79,7 +79,8 @@ trait PhotoEditor{
 		}
 		return false;
 	}
-  public function watermarkImage(){
+  public function watermarkImage(string $wm, string $pos = "center"){
+    if (!\file_exists())
   	$type = \exif_imagetype($this->fullPath());
     // $filename = "testfile.jpg";
     $filename = $this->fullPath();
@@ -116,11 +117,11 @@ trait PhotoEditor{
 		\imagedestroy($stamp);
     return $return;
 	}
-	public function rotateImage(){
-		if( (bool)$this->rotate_image ){
+	public function rotateImage(int $degree = 90){
+		if( $this->type_group == "image" ){
 			$type = \exif_imagetype($this->fullPath());
 			$img = $this->imageCreateFromAny($this->fullPath());
-			$rotate = \imagerotate($img, $this->rotate_image, 0);
+			$rotate = \imagerotate($img, $degree, 0);
 			switch ($type) {
         case 1 :
           \imagegif($rotate, $this->fullPath(), 100);
@@ -163,5 +164,7 @@ trait PhotoEditor{
     }
     return true;
   }
-
+  protected function _wmPosition (string $setting) {
+    $pos = ["x"=>10];
+  }
 }
